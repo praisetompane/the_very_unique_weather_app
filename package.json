@@ -4,7 +4,8 @@
   "description": "provides weather predictions for a week",
   "main": "index.js",
   "scripts": {
-    "create": "webpack"
+    "start": "webpack-dev-server --open",
+    "build": "NODE_ENV='production' webpack -p"
   },
   "repository": {
     "type": "git",
@@ -34,5 +35,11 @@
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0",
     "path": "^0.12.7"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react"
+    ]
   }
 }

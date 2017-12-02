@@ -1,10 +1,10 @@
-let Path = require('path')
+let path = require('path')
 let HtmlWebpackPlugin = require('html-webpack-plugin')
 let webpack = require('webpack')
 
 
 module.exports = {
-    entry: 'index.js',
+    entry: './app/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'index_bundle.js',
@@ -12,13 +12,13 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.(js)$/, use: 'babel-loader' }
+            { test: /\.(js)$/, use: 'babel-loader' },
             //{ test: /\.css$/, use: ['style-loader', 'css-loader'] }
         ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'index.html'
+            template: 'app/index.html'
         })
     ]
 }

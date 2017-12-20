@@ -21,12 +21,16 @@
   },
   "homepage": "https://github.com/Tompanepp/weatherapp#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
+    "babel-polyfill": "^6.0.16",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
     "babel-loader": "^7.1.0",
     "babel-preset-env": "^1.5.2",
     "babel-preset-react": "^6.24.1",
@@ -40,7 +44,9 @@
   "babel": {
     "presets": [
       "env",
-      "react"
+      "react",
+      "es2015",
+      "stage-0"
     ]
   }
 }

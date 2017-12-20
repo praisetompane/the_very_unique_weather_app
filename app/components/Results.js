@@ -11,18 +11,27 @@ class Results extends React.Component {
         super(props)
 
         this.state = {
-            city: ''
+            city: '',
+            weatherItems: [],
         }
     }
 
     componentDidMount() {
-        let city = queryString.parse(this.props.location.city)
-        console.log(city)
+        const city = queryString.parse(this.props.location.city);
+        Api.retrieveWeather(city.city)
+            .then((cityWeather) => {
+            this.setState(() => {
+                return {
+                    city,
+                    weatherItems: cityWeather.list,
+                }
+            })
+        })
     }
 
     render() {
         return (
-            <div> Results </div>
+            <div> Results</div>
         )
     }
 }

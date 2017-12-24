@@ -2,10 +2,14 @@ let React = require('react')
 let Search = require('./Search')
 let Nav = require('./Nav')
 
+//TODO Add background image pattern
 class Home extends React.Component {
     render() {
         return (
-            <Search />
+            <div>
+                <img/>
+                <Search />
+            </div>
         )
     }
 }

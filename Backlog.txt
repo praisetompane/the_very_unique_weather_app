@@ -1,0 +1,5 @@
+1. Render weather data on Results page
+2. Align Title and Title bar Search form
+3. Set background image using the pattern in './images'
+4. Unit tests
+5. Gracefully handle errors

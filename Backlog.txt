@@ -1,4 +1,7 @@
-1. Render weather data on Results page
+1. Drill down on weather
+     1.1. Group the weather items by date **
+     1.2. Display 3 hour forecast on click of the date weather.
+     1.3. Display the details on click of the hour forecast
 2. Align Title and Title bar Search form
 3. Set background image using the pattern in './images'
 4. Unit tests

@@ -6,7 +6,6 @@ let DayWeatherSummary = require('./DayWeatherSummary');
 class Results extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             city: '',
             weatherItems: [],
@@ -14,9 +13,23 @@ class Results extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        const city = queryString.parse(this.props.location.city);
+        const dayDate = queryString.parse(nextProps.location.dayDate);
+        Api.retrieveCityWeatherOnDay(city.city, dayDate.dayDate)
+            .then((cityWeather) => {
+                this.setState(() => {
+                    return {
+                        city,
+                        weatherItems: cityWeather,
+                        loading: false,
+                    }
+                })
+            });
+    }
+
     componentDidMount() {
         const city = queryString.parse(this.props.location.city);
-        //TODO add custom groupBy until I pull in appropriate library
         Api.retrieveFiveDayWeather(city.city)
             .then((cityWeather) => {
                 this.setState(() => {
@@ -26,7 +39,7 @@ class Results extends React.Component {
                         loading: false,
                     }
                 })
-            })
+            });
     }
 
     render() {
@@ -40,6 +53,8 @@ class Results extends React.Component {
                             <DayWeatherSummary
                                 image={`http://openweathermap.org/img/w/${ww.weather[0].icon}.png`}
                                 heading={ww.dt_txt}
+                                dayDate={ww.dt_txt}
+                                city={this.state.city}
                             />
                         )
                     }

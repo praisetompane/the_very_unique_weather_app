@@ -12,8 +12,8 @@
         2. Invoke a 'Weather' service with the target location
         3. Update state with the weather forecast data
 */
-let React = require('react')
-let NavLink = require('react-router-dom').NavLink
+let React = require('react');
+let NavLink = require('react-router-dom').NavLink;
 
 class Search extends React.Component {
     constructor(props) {
@@ -29,7 +29,7 @@ class Search extends React.Component {
 
     handleChange(event) {
         //TODO Research indepth again about why this is needed?
-        let value = event.target.value
+        let value = event.target.value;
         this.setState(() => {
             return {
                 city: value
@@ -39,7 +39,7 @@ class Search extends React.Component {
 
     render() {
         // Find out what this match is and how it gets injects
-        let match = this.props.match
+        let match = this.props.match;
         return (
             <div className='city-container'>
                 <input

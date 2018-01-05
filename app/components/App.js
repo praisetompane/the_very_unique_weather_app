@@ -1,11 +1,12 @@
-let React = require('react')
-let ReactRouter = require('react-router-dom')
-let Router = ReactRouter.BrowserRouter
-let Route = ReactRouter.Route
-let Switch = ReactRouter.Switch
-let Results = require('./Results')
-let Home = require('./Home')
-let Nav = require('./Nav')
+let React = require('react');
+let ReactRouter = require('react-router-dom');
+let Router = ReactRouter.BrowserRouter;
+let Route = ReactRouter.Route;
+let Switch = ReactRouter.Switch;
+let Results = require('./Results');
+let Home = require('./Home');
+let Nav = require('./Nav');
+let DayWeatherDetails = require('./DayWeatherDetails');
 /*
  Responsibilities:
  1. Displaying background with a search box and button if state has no weather forecasts
@@ -28,6 +29,7 @@ class App extends React.Component {
                         <Switch>
                             <Route exact path='/' component={Home}/>
                             <Route exact path='/results' component={Results}/>
+                            <Route exact path='/results/details' component={DayWeatherDetails}/>
                             <Route render={() => <p> Not found </p>}/>
                         </Switch>
                     </div>

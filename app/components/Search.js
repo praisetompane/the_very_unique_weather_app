@@ -17,11 +17,11 @@ let NavLink = require('react-router-dom').NavLink;
 
 class Search extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             city: ''
-        }
+        };
 
         //TODO Research indepth again about why this is needed?
         this.handleChange = this.handleChange.bind(this)
@@ -38,8 +38,6 @@ class Search extends React.Component {
     }
 
     render() {
-        // Find out what this match is and how it gets injects
-        let match = this.props.match;
         return (
             <div className='city-container'>
                 <input

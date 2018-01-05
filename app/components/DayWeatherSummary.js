@@ -1,17 +1,18 @@
 let React = require('react');
-let PropTypes = require('prop-types')
+let PropTypes = require('prop-types');
 let NavLink = require('react-router-dom').NavLink;
 
-/*Add on click that passes the 'day' in the url(used later in the results component to
- determine which API function to call
- */
-function DayWeatherSummary({image, heading, dayDate, city}) {
+//TODO we need to fix this hack : weatherItems.filter(x => x.dt_txt === dayDate)[0]
+function DayWeatherSummary({path, image, heading, dayDate, city, weatherItems}) {
+    const dayWeatherDetails = weatherItems.filter(x => x.dt_txt === dayDate)[0];
     return <NavLink
         className="dayContainer"
         to={{
-            pathname: '/results',
+            pathname: path,
+            image: `?image=` + image,
             dayDate: `?dayDate=` + dayDate,
-            city: `?city=` + city.city
+            city: `?city=` + city.city,
+            dayWeatherDetails: dayWeatherDetails
         }}>
         <img src={image}/>
         <h2>{heading}</h2>

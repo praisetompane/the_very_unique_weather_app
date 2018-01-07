@@ -4,9 +4,9 @@ let Search = require('./Search')
 class Nav extends React.Component {
     render() {
         return (
-            <div>
+            <div className='navbar'>
                 <h1> The Very Unique Weather App </h1>
-                <Search />
+                <Search flexDirection='row'/>
             </div>
         )
     }

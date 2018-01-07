@@ -6,7 +6,7 @@ let NavLink = require('react-router-dom').NavLink;
 function DayWeatherSummary({path, image, heading, dayDate, city, weatherItems}) {
     const dayWeatherDetails = weatherItems.filter(x => x.dt_txt === dayDate)[0];
     return <NavLink
-        className="dayContainer"
+        className="day-forecast-container"
         to={{
             pathname: path,
             image: `?image=` + image,

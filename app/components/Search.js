@@ -1,19 +1,6 @@
-/*
-    Form Input
-
-    Behaviours:
-        Update target location in state when user types value
-*/
-
-/*
-    Form Button
-    Behaviours:
-        1. Take target location in state
-        2. Invoke a 'Weather' service with the target location
-        3. Update state with the weather forecast data
-*/
 let React = require('react');
 let NavLink = require('react-router-dom').NavLink;
+let PropTypes = require('prop-types');
 
 class Search extends React.Component {
     constructor(props) {
@@ -24,10 +11,10 @@ class Search extends React.Component {
         };
 
         //TODO Research indepth again about why this is needed?
-        this.handleChange = this.handleChange.bind(this)
+        this.handleCityUpdate = this.handleCityUpdate.bind(this)
     }
 
-    handleChange(event) {
+    handleCityUpdate(event) {
         //TODO Research indepth again about why this is needed?
         let value = event.target.value;
         this.setState(() => {
@@ -39,23 +26,26 @@ class Search extends React.Component {
 
     render() {
         return (
-            <div className='city-container'>
+            <div className='search-container'
+                 style={{flexDirection: this.props.flexDirection}}>
                 <input
+                    type='text'
+                    className="form-control"
                     id='city'
                     placeholder='Cape Town'
-                    type='text'
                     autoComplete='off'
                     value={this.state.city}
-                    onChange={this.handleChange}
+                    onChange={this.handleCityUpdate}
                 >
                 </input>
                 <NavLink
-                    className='button btn-success'
+                    type='button'
+                    className='btn btn-success'
+                    style={{margin: 10}}
                     to={{
                         pathname: '/results',
                         city: `?city=` + this.state.city
                     }}
-                    type='submit'
                     disabled={!this.state.city}
                 >
                     Get Weather
@@ -64,5 +54,13 @@ class Search extends React.Component {
         )
     }
 }
+
+Search.defaultProps = {
+    flexDirection: 'row'
+};
+
+Search.propTypes = {
+    direction: PropTypes.string,
+};
 
 module.exports = Search;

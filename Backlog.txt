@@ -1,2 +1,4 @@
 4. Unit tests
 5. Gracefully handle errors
+6. Clean up code
+7. Display date as in sub header when displaying hourly forecasts

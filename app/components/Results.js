@@ -2,6 +2,7 @@ let React = require('react');
 let QueryString = require('query-string');
 let Api = require('../utils/Api');
 let DayWeatherSummary = require('./DayWeatherSummary');
+let Loading = require('./Loading');
 
 class Results extends React.Component {
     constructor(props) {
@@ -47,10 +48,10 @@ class Results extends React.Component {
     }
 
     render() {
-        if (this.state.loading) return <div> Loading </div>;
+        if (this.state.loading) return <Loading text='Getting you the weather'/>;
         else return (
             <div>
-                <h1 className='forecast-header'>{this.state.city.city}</h1>
+                <h1 className='header'>{this.state.city.city}</h1>
                 <div className="forecast-container">
                     {
                         this.state.weatherItems.map(ww =>

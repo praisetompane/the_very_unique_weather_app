@@ -1,8 +1,8 @@
 let React = require('react');
 let QueryString = require('query-string');
-let Api = require('../utils/Api');
-let DayWeatherSummary = require('./DayWeatherSummary');
-let Loading = require('./Loading');
+let Api = require('../../utils/Api');
+let Forecast = require('./Forecast');
+let Loading = require('../layout/Loading');
 
 class Results extends React.Component {
     constructor(props) {
@@ -55,7 +55,7 @@ class Results extends React.Component {
                 <div className="forecast-container">
                     {
                         this.state.weatherItems.map(ww =>
-                            <DayWeatherSummary
+                            <Forecast
                                 path={this.state.resultsPathName}
                                 image={`http://openweathermap.org/img/w/${ww.weather[0].icon}.png`}
                                 heading={ww.dt_txt}

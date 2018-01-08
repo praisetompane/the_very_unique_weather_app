@@ -3,10 +3,10 @@ let ReactRouter = require('react-router-dom');
 let Router = ReactRouter.BrowserRouter;
 let Route = ReactRouter.Route;
 let Switch = ReactRouter.Switch;
-let Results = require('./Results');
+let Results = require('../core/Results');
 let Home = require('./Home');
 let Nav = require('./Nav');
-let DayWeatherDetails = require('./DayWeatherDetails');
+let ForecastDetails = require('../core/ForecastDetails');
 
 class App extends React.Component {
     render() {
@@ -18,7 +18,7 @@ class App extends React.Component {
                         <Switch>
                             <Route exact path='/' component={Home}/>
                             <Route exact path='/results' component={Results}/>
-                            <Route exact path='/results/details' component={DayWeatherDetails}/>
+                            <Route exact path='/results/details' component={ForecastDetails}/>
                             <Route render={() => <p> Not found </p>}/>
                         </Switch>
                     </div>

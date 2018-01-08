@@ -15,7 +15,6 @@ class Search extends React.Component {
     }
 
     handleCityUpdate(event) {
-        //TODO Research indepth again about why this is needed?
         let value = event.target.value;
         this.setState(() => {
             return {

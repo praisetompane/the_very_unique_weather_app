@@ -9,19 +9,16 @@ class Search extends React.Component {
         this.state = {
             city: ''
         };
-
-        //TODO Research indepth again about why this is needed?
-        this.handleCityUpdate = this.handleCityUpdate.bind(this)
     }
 
-    handleCityUpdate(event) {
+    handleCityUpdate = (event) => {
         let value = event.target.value;
         this.setState(() => {
             return {
                 city: value
             }
         })
-    }
+    };
 
     render() {
         return (

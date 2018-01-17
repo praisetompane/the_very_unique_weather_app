@@ -4,6 +4,9 @@ let Api = require('../../utils/Api');
 let Forecast = require('./Forecast');
 let Loading = require('../layout/Loading');
 
+const isArrayEmpty = (array) => array.length <= 0;
+const extractForecastDetailsOnDay = (weatherItems, dayDate) => weatherItems.find(x => x.dt_txt === dayDate);
+
 class Results extends React.Component {
     constructor(props) {
         super(props);
@@ -11,63 +14,84 @@ class Results extends React.Component {
             city: '',
             weatherItems: [],
             loading: true,
-            resultsPathName: '',
+            resultsPath: '',
         };
     }
 
+    extractCity = (props) => QueryString.parse(props.location.city).city;
+
+    handleError = () => this.setState(() => {
+        return {
+            loading: false
+        }
+    });
+
     componentWillReceiveProps(nextProps) {
-        const city = QueryString.parse(this.props.location.city);
+        this.setState(() => {
+            return {
+                loading: true
+            }
+        });
+        const city = this.extractCity(this.props);
         const dayDate = QueryString.parse(nextProps.location.dayDate);
-        Api.retrieveCityWeatherOnDay(city.city, dayDate.dayDate)
+        Api.retrieveCityWeatherOnADay(city, dayDate.dayDate)
             .then((cityWeather) => {
-                console.log('cityweather', cityWeather);
                 this.setState(() => {
                     return {
                         city,
                         weatherItems: cityWeather,
                         loading: false,
-                        resultsPathName: 'results/details'
+                        resultsPath: 'results/details',
                     }
                 })
-            });
+            })
+            .catch(() => this.handleError());
     }
 
     componentDidMount() {
-        const city = QueryString.parse(this.props.location.city);
-        Api.retrieveFiveDayWeather(city.city)
+        const city = this.extractCity(this.props);
+        Api.retrieveFiveDayCityWeather(city)
             .then((cityWeather) => {
                 this.setState(() => {
                     return {
                         city,
                         weatherItems: cityWeather,
                         loading: false,
-                        resultsPathName: 'results',
+                        resultsPath: 'results',
                     }
                 })
-            });
+            })
+            .catch(() => this.handleError());
     }
 
     render() {
-        if (this.state.loading) return <Loading text='Getting you the weather'/>;
-        else return (
+        const weatherItems = this.state.weatherItems;
+        const loading = this.state.loading;
+        if (loading) {
+            return <Loading text='Getting you the weather'/>;
+        }
+        else if (!loading && !isArrayEmpty(weatherItems)) return (
             <div>
-                <h1 className='header'>{this.state.city.city}</h1>
+                <h1 className='header'>{this.state.city}</h1>
                 <div className="forecast-container">
                     {
-                        this.state.weatherItems.map(ww =>
+                        weatherItems.map(ww =>
                             <Forecast
-                                path={this.state.resultsPathName}
+                                path={this.state.resultsPath}
                                 image={`http://openweathermap.org/img/w/${ww.weather[0].icon}.png`}
-                                heading={ww.dt_txt}
                                 dayDate={ww.dt_txt}
                                 city={this.state.city}
-                                weatherItems={this.state.weatherItems}
+                                forecastDetails={extractForecastDetailsOnDay(weatherItems, ww.dt_txt)}
                             />
                         )
                     }
                 </div>
             </div>
-        )
+        );
+        else {
+            return <h1 className='header'>Oh dear...I failed to get your weather :(.
+                <br/>Please check your internet connection.</h1>;
+        }
     }
 }
 

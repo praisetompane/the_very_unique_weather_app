@@ -2,27 +2,25 @@ let React = require('react');
 let PropTypes = require('prop-types');
 let NavLink = require('react-router-dom').NavLink;
 
-//TODO we need to fix this hack : weatherItems.filter(x => x.dt_txt === dayDate)[0]
-function DayWeatherSummary({path, image, heading, dayDate, city, weatherItems}) {
-    const dayWeatherDetails = weatherItems.filter(x => x.dt_txt === dayDate)[0];
+function Forecast({path, image, dayDate, city, forecastDetails}) {
     return <NavLink
         className="day-forecast-container"
         to={{
             pathname: path,
             image: `?image=` + image,
             dayDate: `?dayDate=` + dayDate,
-            city: `?city=` + city.city,
-            dayWeatherDetails: dayWeatherDetails
+            city: `?city=` + city,
+            forecastDetails: forecastDetails
         }}>
         <img src={image}/>
-        <h2>{heading}</h2>
+        <h2>{dayDate}</h2>
     </NavLink>
 }
 
-DayWeatherSummary.propsTypes = {
+Forecast.propsTypes = {
     image: PropTypes.string.isRequired,
     heading: PropTypes.string.isRequired,
 };
 
-module.exports = DayWeatherSummary;
+module.exports = Forecast;
 

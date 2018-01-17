@@ -10,7 +10,6 @@ class Loading extends React.Component {
     }
 
     componentDidMount() {
-        console.log('mounted Loading');
         let terminalText = this.props.text + '...';
         this.interval = window.setInterval(() => {
             if (this.state.text === terminalText) {
@@ -26,7 +25,7 @@ class Loading extends React.Component {
                     }
                 })
             }
-        }, 1000);
+        }, 100);
     };
 
     componentWillUnmount() {
@@ -34,9 +33,7 @@ class Loading extends React.Component {
     };
 
     render() {
-        return (
-            <p className='header'>{this.state.text}</p>
-        )
+        return <p className='header'>{this.state.text}</p>;
     }
 
 }

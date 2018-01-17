@@ -5,7 +5,7 @@ class Nav extends React.Component {
     render() {
         return (
             <div className='navbar'>
-                <h1> The Very Unique Weather App </h1>
+                <h1> The Very Unique Weather App ;)</h1>
                 <Search flexDirection='row'/>
             </div>
         )

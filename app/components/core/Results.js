@@ -5,7 +5,19 @@ let Forecast = require('./Forecast');
 let Loading = require('../layout/Loading');
 
 const isArrayEmpty = (array) => array.length <= 0;
-const extractForecastDetailsOnDay = (weatherItems, dayDate) => weatherItems.find(x => x.dt_txt === dayDate);
+const extractForecastDetails = (weatherItems, dayDate) => {
+    const dayWeather = weatherItems.find(x => x.dt_txt === dayDate);
+    const weather = dayWeather.weather.pop();
+    const mainWeather = dayWeather.main;
+    return {
+        date: dayWeather.dt_txt,
+        icon: `http://openweathermap.org/img/w/${weather.icon}.png`,
+        description: weather.description,
+        minimumTemperature: mainWeather.temp_min,
+        maximumTemperature: mainWeather.temp_max,
+        humidity: mainWeather.humidity,
+    };
+};
 
 class Results extends React.Component {
     constructor(props) {
@@ -32,9 +44,8 @@ class Results extends React.Component {
                 loading: true
             }
         });
-        const city = this.extractCity(this.props);
-        const dayDate = QueryString.parse(nextProps.location.dayDate);
-        Api.retrieveCityWeatherOnADay(city, dayDate.dayDate)
+        const city = this.extractCity(nextProps);
+        Api.retrieveCityWeatherOnADay(city, nextProps.location.forecastDetails.date)
             .then((cityWeather) => {
                 this.setState(() => {
                     return {
@@ -75,14 +86,14 @@ class Results extends React.Component {
                 <h1 className='header'>{this.state.city}</h1>
                 <div className="forecast-container">
                     {
-                        weatherItems.map(ww =>
-                            <Forecast
-                                path={this.state.resultsPath}
-                                image={`http://openweathermap.org/img/w/${ww.weather[0].icon}.png`}
-                                dayDate={ww.dt_txt}
-                                city={this.state.city}
-                                forecastDetails={extractForecastDetailsOnDay(weatherItems, ww.dt_txt)}
-                            />
+                        weatherItems.map(ww => {
+                                const forecastDetails = extractForecastDetails(weatherItems, ww.dt_txt);
+                                return <Forecast
+                                    resultsPath={this.state.resultsPath}
+                                    city={this.state.city}
+                                    forecastDetails={forecastDetails}
+                                />
+                            }
                         )
                     }
                 </div>

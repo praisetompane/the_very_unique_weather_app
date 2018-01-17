@@ -4,29 +4,27 @@ let QueryString = require('query-string');
 class ForecastDetails extends React.Component {
     constructor(props) {
         super(props);
-        const image = QueryString.parse(this.props.location.image);
-        const dayDate = QueryString.parse(this.props.location.dayDate);
-        const city = QueryString.parse(this.props.location.city);
+        const city = QueryString.parse(this.props.location.city).city;
         const forecastDetails = this.props.location.forecastDetails;
-        console.log('forecastDetails', forecastDetails);
         this.state = {
-            image: image.image,
-            dayDate: dayDate.dayDate,
-            city: city.city,
-            forecastDetails: forecastDetails,
+            city: city,
+            icon: forecastDetails.icon,
+            date: forecastDetails.date,
+            description: forecastDetails.description,
+            minimumTemperature: forecastDetails.minimumTemperature,
+            maximumTemperature: forecastDetails.maximumTemperature,
+            humidity: forecastDetails.humidity,
         };
     }
-
-    //TODO we need to fix this hack : this.state.dayWeatherDetails.weather[0].description
     render() {
         return <div className='forecast-details'>
-            <img src={this.state.image}/>
-            <p>{this.state.dayDate}</p>
+            <img src={this.state.icon}/>
+            <p>{this.state.date}</p>
             <p>{this.state.city}</p>
-            <p>{this.state.forecastDetails.weather[0].description}</p>
-            <p>min temp: {this.state.forecastDetails.main.temp_min} </p>
-            <p>max temp: {this.state.forecastDetails.main.temp_max} </p>
-            <p>humidity: {this.state.forecastDetails.main.humidity}</p>
+            <p>{this.state.description}</p>
+            <p>minimum temp: {this.state.minimumTemperature} </p>
+            <p>maximum temp: {this.state.maximumTemperature} </p>
+            <p>humidity: {this.state.humidity}</p>
         </div>
     }
 }

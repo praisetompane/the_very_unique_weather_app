@@ -2,24 +2,23 @@ let React = require('react');
 let PropTypes = require('prop-types');
 let NavLink = require('react-router-dom').NavLink;
 
-function Forecast({path, image, dayDate, city, forecastDetails}) {
+function Forecast({resultsPath, city, forecastDetails}) {
     return <NavLink
         className="day-forecast-container"
         to={{
-            pathname: path,
-            image: `?image=` + image,
-            dayDate: `?dayDate=` + dayDate,
-            city: `?city=` + city,
+            pathname: resultsPath,
+            city: `?city=${city}`,
             forecastDetails: forecastDetails
         }}>
-        <img src={image}/>
-        <h2>{dayDate}</h2>
+        <img src={forecastDetails.icon}/>
+        <h2>{forecastDetails.date}</h2>
     </NavLink>
 }
 
 Forecast.propsTypes = {
     image: PropTypes.string.isRequired,
     heading: PropTypes.string.isRequired,
+    forecastDetails: PropTypes.object.isRequired,
 };
 
 module.exports = Forecast;

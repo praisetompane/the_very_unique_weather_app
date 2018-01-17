@@ -1,6 +1,6 @@
 4. Gracefully handle errors
     2. Remove hardcoded [0] index array accesses
-
+    3. Garbish input
 5. Unit tests
 6. Clean up code
 7. Display date as in sub header when displaying hourly forecasts

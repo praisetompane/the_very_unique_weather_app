@@ -5,8 +5,8 @@ let Forecast = require('./Forecast');
 let Loading = require('../layout/Loading');
 
 const isArrayEmpty = (array) => array.length <= 0;
-const extractForecastDetails = (weatherItems, dayDate) => {
-    const dayWeather = weatherItems.find(x => x.dt_txt === dayDate);
+const extractForecastDetails = (weatherItems, date) => {
+    const dayWeather = weatherItems.find(x => x.dt_txt === date);
     const weather = dayWeather.weather.pop();
     const mainWeather = dayWeather.main;
     return {

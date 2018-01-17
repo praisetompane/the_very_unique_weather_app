@@ -2,14 +2,14 @@
 
 let axios = require('axios');
 let moment = require('moment');
-//TODO should I encrypt these?
+let path = require('path');
+
 let id = "9237bff9d2e49f2cc980297aea363903";
 let baseUrl = "https://api.openweathermap.org/data/2.5/forecast";
-let path = require('path');
 
 const groupBy = (collection, property) => {
     return collection.reduce((groups, item) => {
-        const val = item[property];
+        const val = moment(item[property]).format('YYYY-MM-DD');
         groups[val] = groups[val] || [];
         groups[val].push(item);
         return groups;
@@ -18,41 +18,43 @@ const groupBy = (collection, property) => {
 
 const retrieveDataFromFile = () => require('../data/weather.json');
 
-//TODO is this adequate production error handling?
 const handleError = error => console.error(error);
 
-//TODO How do I know that the last item in the list is the latest weather reading, I don't have any ordering?
-const extractDayLatestWeatherReadings = weekDayWeather => weekDayWeather[weekDayWeather.length - 1];
-
-const extractWeekDayWeather = (days, dayToExtract) => days[dayToExtract];
-
-const generateISOFormatDay = dayToAdd => moment().add(dayToAdd, 'days').format('YYYY-MM-DD');
-
-const extractLatestWeekDayWeather = (NUMBER_OF_WEATHER_DAYS, weatherByDate) => {
-    const latestWeather = [];
-    for (let i = 0; i < NUMBER_OF_WEATHER_DAYS; i++) {
-        /*
-         TODO, there is a potential bug when the service returns the weather from next day onwards
-         whilst the client machine is still on the previous day, because generateISOFormatDay() uses
-         the client's current day
-
-         SOLUTION: Use OpenWeather API'S current day not client machine?
-         */
-        const singleWeekDayHourlyWeather = extractWeekDayWeather(weatherByDate, generateISOFormatDay(i));
-        latestWeather.push(extractDayLatestWeatherReadings(singleWeekDayHourlyWeather));
+const compareDates = (a, b) => {
+    if (moment(a.dt_txt) < moment(b.dt_txt)) {
+        return -1;
     }
+    if (moment(a.dt_txt) > moment(b.dt_txt)) {
+        return 1;
+    }
+    return 0;
+};
 
+const extractDayLatestWeatherReadings = weekDayWeather => weekDayWeather.sort(compareDates).pop();
+
+const generateNthDate = dayToAdd => moment().add(dayToAdd, 'days').format('YYYY-MM-DD');
+
+const extractLatestForecast = (weatherByDate) => {
+    const NUMBER_OF_WEEK_DAYS = 5;
+    const latestWeather = [];
+    /* NOTE
+     Array.map does not work because the array grouped by date does not have 0,1...array.length - 1 indices
+     as a result it does not work*, hence I'm falling back to iteration
+     */
+    for (let i = 0; i < NUMBER_OF_WEEK_DAYS; i++) {
+        const hourlyForecasts = weatherByDate[generateNthDate(i)];
+        const latest = extractDayLatestWeatherReadings(hourlyForecasts);
+        latest.dt_txt = moment(latest.dt_txt).format('YYYY-MM-DD');
+        latestWeather.push(latest);
+    }
     return latestWeather;
 };
 
 
 async function retrieveFiveDayCityWeather(city) {
-    const NUMBER_OF_WEEK_DAYS = 5;
     const weather = await retrieveWeather(city);
-    //TODO for some reason the original value(array in this case) is mutated and this computation only produces the dates
-    weather.map(x => x.dt_txt = moment(x.dt_txt).format('YYYY-MM-DD'));
     const weatherByDate = groupBy(weather, 'dt_txt');
-    return extractLatestWeekDayWeather(NUMBER_OF_WEEK_DAYS, weatherByDate);
+    return extractLatestForecast(weatherByDate);
 }
 
 async function retrieveWeather(city) {
@@ -61,7 +63,6 @@ async function retrieveWeather(city) {
         //Use for offline testing
         //const weather = retrieveDataFromFile();
         const weather = await axios.get(apiReq);
-        //TODO non success codes?
         return weather.data.list;
     }
     catch (error) {

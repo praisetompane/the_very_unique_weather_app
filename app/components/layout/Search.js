@@ -40,7 +40,7 @@ class Search extends React.Component {
                     style={{margin: 10}}
                     to={{
                         pathname: '/results',
-                        city: `?city=` + this.state.city
+                        city: this.state.city
                     }}
                     disabled={!this.state.city}
                 >

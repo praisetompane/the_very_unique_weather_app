@@ -1,7 +1,6 @@
-4. Gracefully handle errors
-    2. Remove hardcoded [0] index array accesses
-    3. Garbish input
 5. Unit tests
-6. Clean up code
-7. Display date as in sub header when displaying hourly forecasts
-8. Add screenshots to README
+6. E2E tests
+7. Get temperature in Celcius not Fahnrenhiet
+8. Add unit to temperature
+6. Display date as in sub header when displaying hourly forecasts
+7. Add screenshots to README

@@ -1,15 +1,15 @@
 let React = require('react');
-let QueryString = require('query-string');
 let Api = require('../../utils/Api');
 let Forecast = require('./Forecast');
 let Loading = require('../layout/Loading');
 
 const isArrayEmpty = (array) => array.length <= 0;
-const extractForecastDetails = (weatherItems, date) => {
+const extractForecastDetails = (weatherItems, date, city) => {
     const dayWeather = weatherItems.find(x => x.dt_txt === date);
     const weather = dayWeather.weather.pop();
     const mainWeather = dayWeather.main;
     return {
+        city: city,
         date: dayWeather.dt_txt,
         icon: `http://openweathermap.org/img/w/${weather.icon}.png`,
         description: weather.description,
@@ -30,8 +30,6 @@ class Results extends React.Component {
         };
     }
 
-    extractCity = (props) => QueryString.parse(props.location.city).city;
-
     handleError = () => this.setState(() => {
         return {
             loading: false
@@ -44,13 +42,15 @@ class Results extends React.Component {
                 loading: true
             }
         });
-        const city = this.extractCity(nextProps);
-        Api.retrieveCityWeatherOnADay(city, nextProps.location.forecastDetails.date)
-            .then((cityWeather) => {
+
+        const forecastDetails = nextProps.location.forecastDetails;
+        const city = forecastDetails.city;
+        Api.retrieveCityWeatherOnADay(city, forecastDetails.date)
+            .then((weatherItems) => {
                 this.setState(() => {
                     return {
                         city,
-                        weatherItems: cityWeather,
+                        weatherItems,
                         loading: false,
                         resultsPath: 'results/details',
                     }
@@ -60,13 +60,13 @@ class Results extends React.Component {
     }
 
     componentDidMount() {
-        const city = this.extractCity(this.props);
+        const city = this.props.location.city;
         Api.retrieveFiveDayCityWeather(city)
-            .then((cityWeather) => {
+            .then((weatherItems) => {
                 this.setState(() => {
                     return {
                         city,
-                        weatherItems: cityWeather,
+                        weatherItems,
                         loading: false,
                         resultsPath: 'results',
                     }
@@ -87,10 +87,9 @@ class Results extends React.Component {
                 <div className="forecast-container">
                     {
                         weatherItems.map(ww => {
-                                const forecastDetails = extractForecastDetails(weatherItems, ww.dt_txt);
+                                const forecastDetails = extractForecastDetails(weatherItems, ww.dt_txt, this.state.city);
                                 return <Forecast
                                     resultsPath={this.state.resultsPath}
-                                    city={this.state.city}
                                     forecastDetails={forecastDetails}
                                 />
                             }

@@ -2,5 +2,4 @@
 6. E2E tests
 7. Get temperature in Celcius not Fahnrenhiet
 8. Add unit to temperature
-6. Display date as in sub header when displaying hourly forecasts
-7. Add screenshots to README
+9. Add screenshots to README

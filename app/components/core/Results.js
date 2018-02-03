@@ -11,7 +11,7 @@ const extractForecastDetails = (weatherItems, date, city) => {
     return {
         city: city,
         date: dayWeather.dt_txt,
-        icon: `http://openweathermap.org/img/w/${weather.icon}.png`,
+        icon: `https://openweathermap.org/img/w/${weather.icon}.png`,
         description: weather.description,
         minimumTemperature: mainWeather.temp_min,
         maximumTemperature: mainWeather.temp_max,
@@ -42,7 +42,6 @@ class Results extends React.Component {
                 loading: true
             }
         });
-
         const forecastDetails = nextProps.location.forecastDetails;
         const city = forecastDetails.city;
         Api.retrieveCityWeatherOnADay(city, forecastDetails.date)
@@ -89,6 +88,7 @@ class Results extends React.Component {
                         weatherItems.map(ww => {
                                 const forecastDetails = extractForecastDetails(weatherItems, ww.dt_txt, this.state.city);
                                 return <Forecast
+                                    key={ww.dt_txt}
                                     resultsPath={this.state.resultsPath}
                                     forecastDetails={forecastDetails}
                                 />

@@ -54,6 +54,10 @@ body {
     border-radius: 4px;
 }
 
+.link-without-underline {
+    text-decoration: none;
+}
+
 .btn-success {
     color: white;
     background-color: limegreen;

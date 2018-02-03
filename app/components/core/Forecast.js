@@ -4,7 +4,7 @@ let NavLink = require('react-router-dom').NavLink;
 
 function Forecast({resultsPath, forecastDetails}) {
     return <NavLink
-        className="day-forecast-container"
+        className="day-forecast-container link-without-underline"
         to={{
             pathname: resultsPath,
             forecastDetails: forecastDetails
@@ -14,10 +14,10 @@ function Forecast({resultsPath, forecastDetails}) {
     </NavLink>
 }
 
-Forecast.propsTypes = {
+Forecast.propTypes = {
     image: PropTypes.string.isRequired,
     heading: PropTypes.string.isRequired,
-    forecastDetails: PropTypes.object.isRequired,
+    forecastDetails: PropTypes.object,
 };
 
 module.exports = Forecast;

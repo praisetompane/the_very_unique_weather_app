@@ -1,5 +1,4 @@
 let React = require('react');
-let NavLink = require('react-router-dom').NavLink;
 let PropTypes = require('prop-types');
 
 class Search extends React.Component {
@@ -11,7 +10,7 @@ class Search extends React.Component {
         };
     }
 
-    handleCityUpdate = (event) => {
+    handleChange = (event) => {
         let value = event.target.value;
         this.setState(() => {
             return {
@@ -20,10 +19,17 @@ class Search extends React.Component {
         })
     };
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        this.props.onSubmit(this.state.city);
+    };
+
     render() {
         return (
-            <div className='search-container'
-                 style={{flexDirection: this.props.flexDirection}}>
+            <form className='search-container'
+                  style={{flexDirection: this.props.flexDirection}}
+                  onSubmit={this.handleSubmit}
+            >
                 <input
                     type='text'
                     className="form-control"
@@ -31,22 +37,16 @@ class Search extends React.Component {
                     placeholder='Cape Town'
                     autoComplete='off'
                     value={this.state.city}
-                    onChange={this.handleCityUpdate}
-                >
-                </input>
-                <NavLink
-                    type='button'
+                    onChange={this.handleChange}
+                    required={true}
+                />
+                <input
+                    type='submit'
                     className='btn btn-success'
                     style={{margin: 10}}
-                    to={{
-                        pathname: '/results',
-                        city: this.state.city
-                    }}
-                    disabled={!this.state.city}
-                >
-                    Get Weather
-                </NavLink>
-            </div>
+                    value='Get Weather'
+                />
+                </form>
         )
     }
 }
@@ -60,3 +60,4 @@ Search.propTypes = {
 };
 
 module.exports = Search;
+

@@ -1,8 +1,6 @@
 let React = require('react');
-let PropTypes = require('prop-types');
 
 const ForecastDetails = (props) => {
-    console.log('props', props);
     const forecastDetails = props.location.forecastDetails;
     return <div className='forecast-details'>
         <img src={forecastDetails.icon}/>
@@ -14,11 +12,5 @@ const ForecastDetails = (props) => {
         <p>humidity: {forecastDetails.humidity}</p>
     </div>
 };
-
-
-//TODO add these
-/*ForecastDetails.propTypes =  {
-
-};*/
 
 module.exports = ForecastDetails;

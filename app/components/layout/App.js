@@ -7,6 +7,7 @@ let Results = require('../core/Results');
 let Home = require('./Home');
 let Nav = require('./Nav');
 let ForecastDetails = require('../core/ForecastDetails');
+let Search = require('./Search');
 
 class App extends React.Component {
     render() {
@@ -14,12 +15,12 @@ class App extends React.Component {
             <div className='container'>
                 <Router>
                     <div>
-                        <Nav />
+                        <Route render={Nav}/>
                         <Switch>
                             <Route exact path='/' component={Home}/>
                             <Route exact path='/results' component={Results}/>
                             <Route exact path='/results/details' component={ForecastDetails}/>
-                            <Route render={() => <p> Not found </p>}/>
+                            <Route render={() => <p className='header'> Oops...I can't find that location :( </p>}/>
                         </Switch>
                     </div>
                 </Router>

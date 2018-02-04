@@ -1,16 +1,24 @@
 # The Very Unique Weather App ;)
 
-A simple  weather application to get the a city's weather forecast. My venture into web front end development using React, quite interesting!
+A simple  weather application to get the a city's weather forecast. My venture into web front-end development using React, quite interesting!
 
 ### Features
 
+##### 0. Homepage
+![Alt text](/previewimages/homepage.png?raw=true "Optional Title")
+
 ##### 1. Retrieve 5 day weather forecast
 
+![Alt text](/previewimages/fivedayweather.png?raw=true "Optional Title")
+
 ##### 2. Drill down to 3 hour interval weather forecasts
+![Alt text](/previewimages/hourlyweather.png?raw=true "Optional Title")
 
 ##### 3. Drill into the details of a specific hourly forecast
+![Alt text](/previewimages/detailedweather.png?raw=true "Optional Title")
 
-## Getting the App to Work
+##### You can find the deployed version of the application here: https://the-unique-weather-app.firebaseapp.com/
+## Getting the App to Work Locally
 ### Prerequisites
 You need to install NodeJS to run this program locally. Visit the official NodeJS website for how to do this.
 

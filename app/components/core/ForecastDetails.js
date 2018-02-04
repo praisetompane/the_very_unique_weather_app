@@ -7,8 +7,8 @@ const ForecastDetails = (props) => {
         <p>{forecastDetails.date}</p>
         <p>{forecastDetails.city}</p>
         <p>{forecastDetails.description}</p>
-        <p>minimum temp: {forecastDetails.minimumTemperature} </p>
-        <p>maximum temp: {forecastDetails.maximumTemperature} </p>
+        <p>minimum temp: {forecastDetails.minimumTemperature}°C </p>
+        <p>maximum temp: {forecastDetails.maximumTemperature}°C </p>
         <p>humidity: {forecastDetails.humidity}</p>
     </div>
 };

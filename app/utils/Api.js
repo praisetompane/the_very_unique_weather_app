@@ -59,7 +59,7 @@ async function retrieveFiveDayCityWeather(city) {
 
 async function retrieveWeather(city) {
     try {
-        const apiReq = `${baseUrl}?q=${city},mode=json&appid=${id}`;
+        const apiReq = `${baseUrl}?q=${city},mode=json&appid=${id}&units=metric`;
         //Use for offline testing
         //const weather = retrieveDataFromFile();
         const weather = await axios.get(apiReq);

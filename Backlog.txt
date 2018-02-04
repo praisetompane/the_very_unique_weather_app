@@ -1,5 +1,3 @@
 5. Unit tests
 6. E2E tests
-7. Get temperature in Celcius not Fahnrenhiet
-8. Add unit to temperature
 9. Add screenshots to README

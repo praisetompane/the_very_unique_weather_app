@@ -4,7 +4,7 @@ let NavLink = require('react-router-dom').NavLink;
 
 function Forecast({resultsPath, forecastDetails}) {
     return <NavLink
-        className="day-forecast-container link-without-underline"
+        className='day-forecast-container link-without-underline'
         to={{
             pathname: resultsPath,
             forecastDetails: forecastDetails

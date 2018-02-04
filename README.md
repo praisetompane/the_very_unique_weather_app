@@ -44,8 +44,8 @@ You need to install NodeJS to run this program locally. Visit the official NodeJ
 
 
 ### Authors
-    * **Praise Tompane** 
-    
+   Praise Tompane
+      
 ### Licence
     This project is licensed under the GNU License - see the [LICENSE.md](LICENSE.md) file for details
     

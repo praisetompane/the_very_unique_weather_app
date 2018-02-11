@@ -2,7 +2,7 @@
 
 A simple  weather application to get the a city's weather forecast. My venture into web front-end development using React, quite interesting!
 
-### Features
+### Application Tour
 
 ##### 0. Homepage
 ![Alt text](/previewimages/homepage.png?raw=true "Optional Title")

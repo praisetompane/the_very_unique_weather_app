@@ -1,6 +1,6 @@
 # The Very Unique Weather App ;)
 
-A simple  weather application to get the a city's weather forecast. My venture into web front-end development using React, quite interesting!
+A simple  weather application to get a city's weather forecast. My venture into web front-end development using React, quite interesting!
 
 ### Application Tour
 

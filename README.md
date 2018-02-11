@@ -22,6 +22,8 @@ A simple  weather application to get the a city's weather forecast. My venture i
 ### Prerequisites
 You need to install NodeJS to run this program locally. Visit the official NodeJS website for how to do this.
 
+### Note: You need to be in the project's folder when executing any of these comamnds
+
 ### Installing the application dependencies(You need to be connected to the internet for this)
 
 ```

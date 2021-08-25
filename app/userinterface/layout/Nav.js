@@ -1,6 +1,6 @@
 let React = require('react');
-let Search = require('./Search');
-let FunctionGenerators = require('../../utils/FunctionGenerators');
+let Search = require('../search/Search');
+let FunctionGenerators = require('../../services/FunctionGenerators');
 let NavLink = require('react-router-dom').NavLink;
 
 const Nav = (props) => {

@@ -3,11 +3,11 @@ let ReactRouter = require('react-router-dom');
 let Router = ReactRouter.BrowserRouter;
 let Route = ReactRouter.Route;
 let Switch = ReactRouter.Switch;
-let Results = require('../core/Results');
-let Home = require('./Home');
-let Nav = require('./Nav');
-let ForecastDetails = require('../core/ForecastDetails');
-let Search = require('./Search');
+let Results = require('./userinterface/search/Results');
+let Home = require('./userinterface/Home');
+let Nav = require('./userinterface/layout/Nav');
+let ForecastDetails = require('./userinterface/forecast/ForecastDetails');
+let Search = require('./userinterface/search/Search');
 
 class App extends React.Component {
     render() {

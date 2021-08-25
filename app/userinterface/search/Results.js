@@ -1,6 +1,6 @@
 let React = require('react');
-let Api = require('../../utils/Api');
-let Forecast = require('./Forecast');
+let Api = require('../../services/openweathermap');
+let Forecast = require('../forecast/Forecast');
 let Loading = require('../layout/Loading');
 
 const isArrayEmpty = (array) => array.length <= 0;

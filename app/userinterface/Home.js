@@ -1,7 +1,7 @@
 let React = require('react');
-let Search = require('./Search');
-let Nav = require('./Nav');
-let FunctionGenerators = require('../../utils/FunctionGenerators');
+let Search = require('./search/Search');
+let Nav = require('./layout/Nav');
+let FunctionGenerators = require('../services/FunctionGenerators');
 
 const Home = (props) => {
     return (

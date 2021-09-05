@@ -16,7 +16,7 @@ const groupBy = (collection, property) => {
     }, [])
 };
 
-const retrieveDataFromFile = () => require('../data/weather.json');
+const retrieveDataFromFile = () => require('./test_data/weather.json');
 
 const handleError = error => console.error(error);
 

@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/Tompanepp/weatherapp#readme",
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.2",
     "image-webpack-loader": "^3.4.2",
     "moment": "^2.20.1",
     "react": "^16.2.0",

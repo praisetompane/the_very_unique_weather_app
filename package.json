@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Tompanepp/weatherapp.git"
+    "url": "git+git@github.com:praisetompane/the_unique_wather_app.git"
   },
   "keywords": [
     "react"
@@ -20,15 +20,15 @@
   "author": "Praise Tompane",
   "license": "GNU",
   "bugs": {
-    "url": "https://github.com/Tompanepp/weatherapp/issues"
+    "url": "https://github.com/praisetompane/the_unique_wather_app/issues"
   },
-  "homepage": "https://github.com/Tompanepp/weatherapp#readme",
+  "homepage": "https://github.com/praisetompane/the_unique_wather_app#readme",
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.4",
     "image-webpack-loader": "^3.4.2",
     "moment": "^2.20.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
@@ -49,7 +49,7 @@
     "react-test-renderer": "^16.2.0",
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "webpack-dev-server": "^2.11.5"
   },
   "babel": {
     "presets": [
